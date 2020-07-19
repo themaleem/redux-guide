@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import reducer from "./store/reducer";
-import { createStore} from "redux";
+import counterReducer from "./store/reducers/counter";
+import resultsReducer from "./store/reducers/results";
+import { createStore, combineReducers} from "redux";
 import { Provider } from "react-redux";
 
-const store=createStore(reducer);
+const rootReducer=combineReducers({
+    ctr: counterReducer,
+    results:resultsReducer
+})
+const store=createStore(rootReducer);
 
 ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 registerServiceWorker();
